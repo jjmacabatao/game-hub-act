@@ -36,6 +36,7 @@ const GenresList = ({ onSelectedGenre, selectedGenre }: Props) => {
               variant={"link"}
               fontSize="lg"
               onClick={() => onSelectedGenre(genre)}
+              _hover={{ fontWeight: "bold" }}
             >
               {genre.name}
             </Button>
