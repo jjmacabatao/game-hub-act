@@ -4,11 +4,11 @@ import usePlatforms from "../hooks/usePlatforms";
 import { Platform } from "../hooks/useGames";
 
 interface Props {
-  onSelectedPlatform: (platform: Platform) => void;
+  onSelectPlatform: (platform: Platform) => void;
   selectedPlatform: Platform | null;
 }
 
-const PlatformSelector = ({ onSelectedPlatform, selectedPlatform }: Props) => {
+const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
   const { data, error, isLoading } = usePlatforms();
 
   if (error) return null;
@@ -23,7 +23,7 @@ const PlatformSelector = ({ onSelectedPlatform, selectedPlatform }: Props) => {
           <MenuItem
             key={platform.id}
             onClick={() => {
-              onSelectedPlatform(platform);
+              onSelectPlatform(platform);
             }}
           >
             {platform.name}
