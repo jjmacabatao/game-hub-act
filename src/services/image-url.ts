@@ -1,6 +1,7 @@
+import noImage from "../assets/no-image-placeholder.webp";
+
 const getCroppedUrl = (url: string) => {
-    
-    if(url == null) return ""; //must return default backgroud image
+    if(!url) return noImage;
 
     const target = 'media/'
     const index = url.indexOf(target) + target.length;
