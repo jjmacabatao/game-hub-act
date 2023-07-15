@@ -1,4 +1,11 @@
-import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  HStack,
+  Show,
+  useColorMode,
+} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
@@ -21,6 +28,7 @@ export interface GameQuery {
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
   const { isMobile, width } = useScreenDimension();
+  const { toggleColorMode, colorMode } = useColorMode();
 
   return (
     <Grid
@@ -35,6 +43,8 @@ function App() {
     >
       <GridItem area="nav">
         <NavBar
+          colorMode={colorMode}
+          ontoggleColorMode={toggleColorMode}
           onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         />
       </GridItem>
@@ -76,7 +86,7 @@ function App() {
           </HStack>
         </Box>
 
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid colorMode={colorMode} gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );

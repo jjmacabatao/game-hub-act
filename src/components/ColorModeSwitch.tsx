@@ -1,5 +1,6 @@
 import {
   Button,
+  ColorModeContextType,
   HStack,
   Icon,
   IconButton,
@@ -10,19 +11,20 @@ import {
 import React from "react";
 import { BsMoon, BsSun } from "react-icons/bs";
 
-const ColorModeSwitch = () => {
-  const { toggleColorMode, colorMode } = useColorMode();
+interface Props {
+  ontoggleColorMode: (colormode: string) => void;
+  colorMode: string;
+}
+
+const ColorModeSwitch = ({ ontoggleColorMode, colorMode }: Props) => {
   return (
     <HStack>
-      {/* <Switch
-        colorScheme="green"
-        isChecked={colorMode === "dark"}
-        onChange={toggleColorMode}
-      /> */}
       <IconButton
         aria-label="Dark mode"
         icon={colorMode == "dark" ? <BsSun /> : <BsMoon />}
-        onClick={toggleColorMode}
+        onClick={() =>
+          ontoggleColorMode(colorMode == "dark" ? "light" : "dark")
+        }
       />
     </HStack>
   );
