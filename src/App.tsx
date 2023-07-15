@@ -8,6 +8,8 @@ import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
+import useScreenDimension from "./hooks/useScreenDimension";
+import GenresListMenu from "./components/GenresListMenu";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -18,6 +20,7 @@ export interface GameQuery {
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const { isMobile, width } = useScreenDimension();
 
   return (
     <Grid
@@ -48,6 +51,16 @@ function App() {
         <Box paddingLeft={2}>
           <GameHeading gameQuery={gameQuery} />
           <HStack spacing={5} marginBottom={3}>
+            {width}
+            {isMobile}
+            {isMobile ? (
+              <GenresListMenu
+                selectedGenre={gameQuery.genre}
+                onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+              />
+            ) : (
+              ""
+            )}
             <PlatformSelector
               selectedPlatform={gameQuery.platform}
               onSelectPlatform={(platform) =>
